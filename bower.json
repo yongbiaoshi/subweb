@@ -1,0 +1,27 @@
+{
+  "name": "subweb",
+  "version": "0.0.1",
+  "homepage": "https://github.com/yongbiaoshi/subweb",
+  "authors": [
+    "shyb"
+  ],
+  "description": "my express web demo",
+  "main": "app.js",
+  "moduleType": [],
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}
