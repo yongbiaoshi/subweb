@@ -1,7 +1,54 @@
 doctype html
-html
+html(lang='zh-CN')
   head
     title= title
+    link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    block links
+
+    block scripts
   body
-    block content
+    nav.navbar.navbar-default
+      //- .container-fluid
+      .container
+        .navbar-header
+          a.navbar-brand(href="#")
+        .navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href="#") 首页
+            li
+              a(href="#") App风云榜
+            li
+              a(href="#") 年度最佳
+            li
+              a(href="#") 我的收藏
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href="#") 
+                span.glyphicon.glyphicon-star
+                |&nbsp;消息
+            li
+              a(href="#")
+                span.glyphicon.glyphicon-user
+                |&nbsp;个人资料
+    .container
+      ol.breadcrumb
+        li
+          a(href="#") Home
+        li
+          a(href="#") Library
+        li data
+      block content
+      
+    footer.footer.navbar-fixed-bottom
+      .container
+        p.text-center &copy;2014-2015 Tsingda Edu
+
+        .contact-us.text-center
+          ul.list-inline
+            li 
+              a(href="javascript:void(0);") 关于我们
+            li 
+              a(href="javascript:void(0);") 联系我们
+      

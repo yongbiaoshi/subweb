@@ -1,8 +1,5 @@
+extends layout
 block content
-    #container
-    ul
-        li= a
-        li= b
-    ol
-    	li= a
-    	li= b
+  ul.list-inline
+    each user, index in users
+      li #{user.name}`s order is #{index + 1}

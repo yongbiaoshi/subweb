@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/list', function(req, res, next) {
-  res.render('userlist', {userList: []});
+  res.render('userlist', {users: [{"name": "wlb"}, {"name": "fyj"}, {"name": "hff"}]});
 });
 
 var array = [];
