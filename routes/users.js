@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 var express = require('express');
 var router = express.Router();
 
@@ -14,6 +14,7 @@ router.get('/list', function(req, res, next) {
 var array = [];
 array.push("array");
 array.push("byte");
+array.push("string");
 for(var i = 0; i < array.length; i++) {
     console.log(array[i]);
 }
