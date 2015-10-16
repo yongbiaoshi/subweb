@@ -15,7 +15,7 @@ var array = [];
 array.push("array");
 array.push("byte");
 for(var i = 0; i < array.length; i++) {
-    console.console.log(array[i]);
+    console.log(array[i]);
 }
 
 module.exports = router;
