@@ -20,13 +20,4 @@ router.get('/list', function(req, res, next) {
   res.render('userlist', {users: [{"name": "wlb"}, {"name": "fyj"}, {"name": "hff"}]});
 });
 
-var array = [];
-array.push("array");
-array.push("byte");
-array.push("string");
-
-for(var i = 0; i < array.length; i++) {
-    console.log(array[i]);
-}
-
 module.exports = router;
