@@ -1,5 +1,12 @@
 extends layout
+block title
+  title 系统之家-用户列表
+append links
+  link(rel='stylesheet', href='/stylesheets/userlist.css')
 block content
   ul.list-inline
     each user, index in users
       li #{user.name}`s order is #{index + 1}
+  ul.list-inline
+    each value, key in {"name": "n1", "age": '18'}
+      li #{key}: #{value}

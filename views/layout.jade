@@ -1,28 +1,32 @@
 doctype html
 html(lang='zh-CN')
   head
-    title= title
-    link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    block title
+      title #{title || '系统之家'}
     block links
-
+      link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.css')
+      link(rel='stylesheet', href='/stylesheets/style.css')
     block scripts
   body
     nav.navbar.navbar-default
       //- .container-fluid
       .container
         .navbar-header
-          a.navbar-brand(href="#")
-        .navbar-collapse
+            a.navbar-brand(href="http://xitong.tltian.com/", target="_blank") 系统之家
+        .navbar-collapse(style="height: auto;")
           ul.nav.navbar-nav
             li.active
-              a(href="#") 首页
+              a(href="#index") 网站首页
             li
-              a(href="#") App风云榜
+              a(href="#") 雨林木风
             li
-              a(href="#") 年度最佳
+              a(href="#") 深度技术
             li
-              a(href="#") 我的收藏
+              a(href="#") 萝卜家园
+            li
+              a(href="#") 蕃茄花园
+            li
+              a(href="#") 更多系统
           ul.nav.navbar-nav.navbar-right
             li
               a(href="#") 
@@ -40,7 +44,7 @@ html(lang='zh-CN')
           a(href="#") Library
         li data
       block content
-      
+        |There is nothing to show!
     footer.footer.navbar-fixed-bottom
       .container
         p.text-center &copy;2014-2015 Tsingda Edu
