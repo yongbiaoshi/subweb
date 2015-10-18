@@ -4,6 +4,13 @@ block title
 append links
   link(rel='stylesheet', href='/stylesheets/userlist.css')
 block content
+  .row
+    .col-md-2 序号
+    .col-md-2 用户名
+  each user, index in users
+    .row
+      .col-md-2 #{index + 1}
+      .col-md-2 #{user.name}
   ul.list-inline
     each user, index in users
       li #{user.name}`s order is #{index + 1}
