@@ -7,13 +7,23 @@ html(lang='zh-CN')
       link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.css')
       link(rel='stylesheet', href='/stylesheets/style.css')
     block scripts
+      script(type='text/javascript', src='/lib/jquery/dist/jquery.js')
+      script(type='text/javascript', src='/lib/bootstrap/dist/js/bootstrap.js')
   body
     nav.navbar.navbar-default
       //- .container-fluid
       .container
+        //- .navbar-header.navbar-brand
         .navbar-header
-            a.navbar-brand(href="http://xitong.tltian.com/", target="_blank") 系统之家
-        .navbar-collapse(style="height: auto;")
+            a(href="http://xitong.tltian.com/", target="_blank")
+              img(src="/img/logo.gif", style="height: 50px;", alt="系统之家")
+            //- 小屏幕时，导航栏右边的展开按钮（响应式）
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-navbar' aria-controls='bs-navbar' aria-expanded='false')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+        #bs-navbar.navbar-collapse.collapse(style="height: auto;", aria-expanded='false')
           ul.nav.navbar-nav
             li.active
               a(href="#index") 网站首页
@@ -36,15 +46,9 @@ html(lang='zh-CN')
               a(href="#")
                 span.glyphicon.glyphicon-user
                 |&nbsp;个人资料
-    .container
-      ol.breadcrumb
-        li
-          a(href="#") Home
-        li
-          a(href="#") Library
-        li data
-      block content
-        |There is nothing to show!
+
+    block content
+      |There is nothing to show!
     footer.footer.navbar-fixed-bottom
       .container
         p.text-center &copy;2014-2015 Tsingda Edu

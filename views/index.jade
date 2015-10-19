@@ -1,5 +1,22 @@
 extends layout
 
+append scripts
+  script(type='text/javascript', src='/lib/moment/moment.js')
+
 block content
-  h1= title
-  p Welcome to #{title}
+  .container
+    .has-feedback(style="background-image: url('/img/ylmf.jpg'); height: 380px; width: 1140px; margin-bottom: 15px;")
+      .idown(style="padding: 285px 10px 0 534px;")
+          button(type="button", style="margin-right: 10px").btn.btn-success
+            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> 
+            |Ghost XP 下载
+          button(type="button", style="margin-right: 10px").btn.btn-success
+            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+            |Win7 64位下载
+          button(type="button", style="margin-right: 10px").btn.btn-success
+            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+            |Win7 32位下载
+    .row
+      .col-md-12
+        p.bg-info 系统之家精品系统下载站为您提供经典Ghost XP系统下载与免激活的32位、64位Win7系统下载。所有系统已经更新到最新！更新日期：#{now}
+
