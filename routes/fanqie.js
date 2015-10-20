@@ -9,7 +9,7 @@ var result = {module: 'fanqie'};
 router.get('/', function(req, res, next) {
   //TODO
 
-  res.render('qanqie', result);
+  res.render('fanqie', result);
 });
 
 module.exports = router;
