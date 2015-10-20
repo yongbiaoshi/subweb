@@ -4,3 +4,12 @@
 body {
   padding-bottom: 90px;
 }
+
+.navbar-header .logo-img{
+  padding-right: 10px
+}
+
+.index-info{
+  background-color: #E4E4E4;
+  padding: 10px;
+}

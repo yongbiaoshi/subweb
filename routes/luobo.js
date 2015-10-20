@@ -8,7 +8,7 @@ var result = {module: 'luobo'};
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //TODO
-
+  //throw Error("Luobo is not Support");
   res.render('luobo', result);
 });
 
