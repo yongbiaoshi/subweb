@@ -14,6 +14,7 @@
     "jade": "~1.11.0",
     "moment": "^2.10.6",
     "morgan": "~1.6.1",
+    "redis": "^2.2.5",
     "serve-favicon": "~2.3.0"
   },
   "description": "练习node express",

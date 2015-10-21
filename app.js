@@ -4,19 +4,54 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var redis = require('redis');
+var RedisStore = require('connect-redis')(session);
+
 
 //日期格式化工具
 var moment = require('moment');
 moment.locale('zh-cn');
 
-var index = require('./routes/index');
-var ylmf = require('./routes/ylmf');
-var shendu = require('./routes/shendu');
-var luobo = require('./routes/luobo');
-var fanqie = require('./routes/fanqie');
-var more = require('./routes/more');
+var config = require('./appconfig.js');
+var index = require('./routes/index.js');
+var ylmf = require('./routes/ylmf.js');
+var shendu = require('./routes/shendu.js');
+var luobo = require('./routes/luobo.js');
+var fanqie = require('./routes/fanqie.js');
+var more = require('./routes/more.js');
+
+var redisClient = redis.createClient(config.redis);
+
+redisClient.on("error", function (err) {
+  console.log("Redis Client Error :" + err);
+});
+redisClient.set('foo', 123);
+redisClient.get('foo', function(err, res){
+  if(err) {
+    console.log('Redis 连接失败');
+  }
+  else{
+    console.log('Redis 连接正常，测试数据-foo:', res);
+  }
+});
+
 
 var app = express();
+
+//session配置
+app.use(session({
+  secret: "subweb",
+  store: new RedisStore({client: redisClient}),
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    secure: false,
+    maxAge: 10*60*1000
+  }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,12 +65,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next){
+
+  console.log("request url: ", req.originalUrl);
+
+  if(!req.session){
+    return next(new Error('oh no, session store connections is lost! Host : ' + config.redis.host));
+  }
+  req.session.webname = 'subweb';
+  req.session.save(function(err){
+    // session saved
+    next(err);
+  });
+});
+
+// filter
 app.use('/', index);
 app.use('/ylmf', ylmf);
 app.use('/shendu', shendu);
 app.use('/luobo', luobo);
 app.use('/fanqie', fanqie);
 app.use('/more', more);
+
+//关闭Redis连接
+// redisClient.end();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
