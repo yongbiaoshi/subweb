@@ -1,0 +1,35 @@
+extends layout
+
+append links
+  link(rel='stylesheet', href='/stylesheets/cover.css')
+append style
+  style.
+    body{
+      padding-bottom: 0;
+    }
+    .site-wrapper{
+      background-image: url('/img/EU_6.jpg');
+      background-size: cover;
+    }
+
+block navbar
+block content
+  .site-wrapper
+    .site-wrapper-inner
+      .cover-container 
+        .masthead.clearfix
+          .inner
+            h3.masthead-brand 系统之家
+            nav
+              ul.nav.masthead-nav
+                li.active: a(href='/') 首页
+                li: a(href='/index') 系统下载
+                li: a(href='/contact') 服务支持
+        .inner.cover
+          h1.cover-heading 系统之家
+          p.lead 我们与您一样<br>更注重系统好用<br>让我们一起传递系统，延续经典
+          p.lead: a.btn.btn-lg.btn-default(href='/index') 了解更多
+        .mastfoot
+          .inner
+            include footer.jade
+block footer

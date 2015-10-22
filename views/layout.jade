@@ -7,8 +7,12 @@ html(lang='zh-CN')
     block title
       title #{title || '系统之家'}
     block links
+      link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap-theme.css')
       link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.css')
       link(rel='stylesheet', href='/stylesheets/style.css')
+
+    block style
+
     block scripts
       script(type='text/javascript', src='/lib/jquery/dist/jquery.js')
       script(type='text/javascript', src='/lib/bootstrap/dist/js/bootstrap.js')
@@ -20,41 +24,37 @@ html(lang='zh-CN')
     script(src="/js/respond.min.js")
     <![endif]-->
   body
-    nav.navbar.navbar-default
-      //- .container-fluid
-      .container
-        //- .navbar-header.navbar-brand
-        .navbar-header
-          a(href="http://xitong.tltian.com/", target="_blank"): img.logo-img(src="/img/logo.gif", style="height: 50px;", alt="系统之家")
-          //- 小屏幕时，导航栏右边的展开按钮（响应式）
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-navbar' aria-controls='bs-navbar' aria-expanded='false')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-        #bs-navbar.navbar-collapse.collapse(style="height: auto;", aria-expanded='false')
-          ul.nav.navbar-nav
-            li(class={active: module == 'index'}): a(href="/") 网站首页
-            li(class={active: module == 'ylmf'}): a(href="/ylmf") 雨林木风
-            li(class={active: module == 'shendu'}): a(href="/shendu") 深度技术
-            li(class={active: module == 'luobo'}): a(href="/luobo") 萝卜家园
-            li(class={active: module == 'fanqie'}): a(href="/fanqie") 蕃茄花园
-            li(class={active: module == 'more'}): a(href="/more") 更多系统
-          ul.nav.navbar-nav.navbar-right
-            li: a(href="#")
-              span.glyphicon.glyphicon-star
-              | &nbsp;消息
-            li: a(href="#")
-              span.glyphicon.glyphicon-user
-              | &nbsp;个人资料
+    block navbar
+      nav.navbar.navbar-default
+        //- .container-fluid
+        .container
+          //- .navbar-header.navbar-brand
+          .navbar-header
+            a(href="http://xitong.tltian.com/", target="_blank"): img.logo-img(src="/img/logo.gif", style="height: 50px;", alt="系统之家")
+            //- 小屏幕时，导航栏右边的展开按钮（响应式）
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-navbar' aria-controls='bs-navbar' aria-expanded='false')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+          #bs-navbar.navbar-collapse.collapse(style="height: auto;", aria-expanded='false')
+            ul.nav.navbar-nav
+              li(class={active: module == 'index'}): a(href="/index") 网站首页
+              li(class={active: module == 'ylmf'}): a(href="/ylmf") 雨林木风
+              li(class={active: module == 'shendu'}): a(href="/shendu") 深度技术
+              li(class={active: module == 'luobo'}): a(href="/luobo") 萝卜家园
+              li(class={active: module == 'fanqie'}): a(href="/fanqie") 蕃茄花园
+              li(class={active: module == 'more'}): a(href="/more") 更多系统
+            ul.nav.navbar-nav.navbar-right
+              li: a(href="#")
+                span.glyphicon.glyphicon-star
+                | &nbsp;消息
+              li: a(href="#")
+                span.glyphicon.glyphicon-user
+                | &nbsp;个人资料
 
     block content
       .container There is nothing to show!
-    footer.footer.navbar-fixed-bottom
-      .container
-        p.text-center &copy;2014-2015 Tsingda Edu
-        .contact-us.text-center
-          ul.list-inline
-            li: a(href="javascript:void(0);") 关于我们
-            li: a(href="javascript:void(0);") 联系我们
+    block footer
+      include footer.jade
       

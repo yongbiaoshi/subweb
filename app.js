@@ -14,6 +14,7 @@ var moment = require('moment');
 moment.locale('zh-cn');
 
 var config = require('./appconfig.js');
+var welcome = require('./routes/welcome.js');
 var index = require('./routes/index.js');
 var ylmf = require('./routes/ylmf.js');
 var shendu = require('./routes/shendu.js');
@@ -80,7 +81,8 @@ app.use(function(req, res, next){
 });
 
 // filter
-app.use('/', index);
+app.use('/', welcome);
+app.use('/index', index);
 app.use('/ylmf', ylmf);
 app.use('/shendu', shendu);
 app.use('/luobo', luobo);
