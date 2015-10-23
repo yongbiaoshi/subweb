@@ -9,7 +9,11 @@ var result = {module: 'ylmf'};
 router.get('/', function(req, res, next) {
   //TODO
 
-  res.render('ylmf', result);
+  setTimeout(function(){
+    throw new Error("It's An Error!!");
+    res.render('ylmf', result);
+  }, 1000);
+  // res.render('ylmf', result);
 });
 
 module.exports = router;

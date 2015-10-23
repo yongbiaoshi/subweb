@@ -7,13 +7,14 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var redis = require('redis');
 var RedisStore = require('connect-redis')(session);
+var domain = require('domain');
 
 
 //日期格式化工具
 var moment = require('moment');
 moment.locale('zh-cn');
 
-var config = require('./appconfig.js');
+var localeConfig = require('./appconfig.js');
 var welcome = require('./routes/welcome.js');
 var index = require('./routes/index.js');
 var ylmf = require('./routes/ylmf.js');
@@ -22,7 +23,7 @@ var luobo = require('./routes/luobo.js');
 var fanqie = require('./routes/fanqie.js');
 var more = require('./routes/more.js');
 
-var redisClient = redis.createClient(config.redis);
+var redisClient = redis.createClient(localeConfig.redis);
 
 redisClient.on("error", function (err) {
   console.log("Redis Client Error :" + err);
@@ -39,6 +40,14 @@ redisClient.get('foo', function(err, res){
 
 
 var app = express();
+
+app.use(function(req, res, next){
+  var reqDomain = domain.create();
+  reqDomain.on('error', function(err){
+    sendError(err, req, res);
+  });
+  reqDomain.run(next);
+});
 
 //session配置
 app.use(session({
@@ -100,36 +109,30 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    var result = {message: err.message, error: err};
-    if(isAjaxReq(req)){
-      res.send(result);
-    }else{
-      res.render('error', result);
-    }
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  var result = {message: err.message, error: {}};
-  if(isAjaxReq(req)){
-    res.send(result);
-  }else{
-    res.render('error', result);
-  }
+  sendError(err, req, res);
 });
 
 //判断是否是Ajax请求
 function isAjaxReq(req){
   return req && req.headers && req.headers['X-Requested-With'] == 'XMLHttpRequest';
+}
+
+function sendError(err, req, res){
+  console.log('捕获到错误！！-- erro code : ', err.status || 500);
+  console.log('env', app.get('env'), ' process.env.NODE_ENV : ', process.env.NODE_ENV);
+  res.status(err.status || 500);
+  //production error handler
+  var result = {message: err.message, error: {}};
+  // development error handler will print stacktrace
+  if(app.get('env') === 'development'){
+    result.error = err;
+  }
+  if(isAjaxReq(req)){
+    res.send(result);
+  }else{
+    res.render('error', result);
+  }
 }
 
 module.exports = app;
