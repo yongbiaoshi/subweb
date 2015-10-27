@@ -15,6 +15,7 @@ var moment = require('moment');
 moment.locale('zh-cn');
 
 var localeConfig = require('./appconfig.js');
+var errorHandler = require('./routes/error.js');
 var welcome = require('./routes/welcome.js');
 var index = require('./routes/index.js');
 var ylmf = require('./routes/ylmf.js');
@@ -44,7 +45,7 @@ var app = express();
 app.use(function(req, res, next){
   var reqDomain = domain.create();
   reqDomain.on('error', function(err){
-    sendError(err, req, res);
+    errorHandler(err, req, res, next);
   });
   reqDomain.run(next);
 });
@@ -109,30 +110,22 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-app.use(function(err, req, res, next) {
-  sendError(err, req, res);
+app.use(errorHandler);
+// 当异常未被捕获的时候
+process.on('uncaughtException', function (err) {
+  console.error("uncaughtException ERROR");
+  if (typeof err === 'object') {
+    if (err.message) {
+      console.error('ERROR: ' + err.message)
+    }
+    if (err.stack) {
+      console.error(err.stack);
+    }
+  } else {
+    console.error('argument is not an object');
+  }
 });
 
-//判断是否是Ajax请求
-function isAjaxReq(req){
-  return req && req.headers && req.headers['X-Requested-With'] == 'XMLHttpRequest';
-}
 
-function sendError(err, req, res){
-  console.log('捕获到错误！！-- erro code : ', err.status || 500);
-  console.log('env', app.get('env'), ' process.env.NODE_ENV : ', process.env.NODE_ENV);
-  res.status(err.status || 500);
-  //production error handler
-  var result = {message: err.message, error: {}};
-  // development error handler will print stacktrace
-  if(app.get('env') === 'development'){
-    result.error = err;
-  }
-  if(isAjaxReq(req)){
-    res.send(result);
-  }else{
-    res.render('error', result);
-  }
-}
 
 module.exports = app;
