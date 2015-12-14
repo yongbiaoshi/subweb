@@ -116,7 +116,7 @@ process.on('uncaughtException', function (err) {
   console.error("uncaughtException ERROR");
   if (typeof err === 'object') {
     if (err.message) {
-      console.error('ERROR: ' + err.message)
+      console.error('ERROR: ' + err.message);
     }
     if (err.stack) {
       console.error(err.stack);

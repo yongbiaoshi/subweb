@@ -1,3 +1,12 @@
 extends layout
 block title
   title 系统之家-深度技术
+block content
+  .container
+    each user in users
+      .row
+        .col-md-2= user.name
+        .col-md-2= user.getAttribute('age')
+        .col-md-2= user['age']
+        .col-md-2= user.getInfo().name
+        .col-md-2= moment(user.date).format('YYYY-MM-D HH:mm:ss')
