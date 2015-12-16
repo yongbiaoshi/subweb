@@ -88,6 +88,8 @@ app.use(function(req, res, next){
     // session saved
     next(err);
   });
+  res.locals.webname = req.session.webname;
+  res.locals.moment = moment;
 });
 
 // filter

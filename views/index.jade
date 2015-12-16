@@ -5,6 +5,8 @@ append scripts
 
 block content
   .container
+    pre= JSON.stringify(locals)
+    pre= webname
     .has-feedback(style="background-image: url('/img/ylmf.jpg'); height: 380px; width: 1140px; margin-bottom: 15px;")
       .idown(style="padding: 285px 10px 0 534px;")
           button(type="button", style="margin-right: 10px").btn.btn-success

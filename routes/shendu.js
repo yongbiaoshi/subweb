@@ -9,7 +9,6 @@ var result = {module: 'shendu'};
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //TODO
-  result.moment = moment;
   user1 = new User('shendu', 18);
   user1.date = new Date();
   user2 = new User('ylmf', 19);
